@@ -23,8 +23,8 @@ jobs:
       - name: "Test PDF"
         uses: ./
         with:
-          command: "teitopdf"
-          args: "_test/generalP5.xml _output/generalP5.pdf" 
+          command: "teitofo"
+          args: "_test/generalP5.xml _output/generalP5.fo && fop _output/generalP5.fo _output/generalP5.pdf" 
       # Use the output from the `hello` step
       - name: Check to see what happened
         if: always()
