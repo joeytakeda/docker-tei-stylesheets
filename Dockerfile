@@ -14,11 +14,13 @@ RUN mkdir /var/fop && curl https://dlcdn.apache.org/xmlgraphics/fop/binaries/fop
           && chmod 755 /usr/local/bin/fop
 
 # Now update PATH
-
 ENV PATH="${PATH}:/usr/local/share/xml/tei/stylesheet/bin/"
 
-
 RUN mkdir -p /tei
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+
 WORKDIR "/tei"
 
-
+ENTRYPOINT ["/entrypoint.sh"]
