@@ -3,14 +3,10 @@ name: 'TEI Stylesheets'
 description: 'Run using the TEI Stylesheets'
 inputs:
   command:  # Command
-    description: "Transformation to use (e.g. teitorng; oddtoodd)"
-    required: true
-  args: #Args
-    description: "The rest of the command to run (e.g. input, flags etc)"
+    description: "Command to run"
     required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.command }}
-    - ${{ inputs.args }}

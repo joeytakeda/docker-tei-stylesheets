@@ -12,17 +12,16 @@ This is a **proof-of-concept, experimental, WIP, draft** (etc etc) docker image 
 docker pull ghcr.io/joeytakeda/docker-tei-stylesheets:main
 
 # Now run this, mounting your current directory to the teic_home directory
-docker run --rm -it `pwd`:/var/teic_home joeytakeda/docker-tei-stylesheets $COMMAND $INPUT [$OUTPUT]
+docker run --rm -it `pwd`:/tei joeytakeda/docker-tei-stylesheets $COMMAND $INPUT [$OUTPUT]
 
 ```
 
 Example:
 
 ```bash
-
 # Convert a docx to TEI
 
-docker run --rm -it `pwd`:/var/teic_home joeytakeda/docker-tei-stylesheets docxtotei myTestFile.docx
+docker run --rm -it `pwd`:/tei joeytakeda/docker-tei-stylesheets docxtotei myTestFile.docx
 
 ```
 
@@ -30,7 +29,7 @@ Note that this could be aliased (something like):
 
 ```bash
 # ~/.bash_profile
-alias transformtei="docker run --rm -it `pwd`:/var/teic_home joeytakeda/docker-tei-stylesheets"
+alias transformtei="docker run --rm -it `pwd`:/tei joeytakeda/docker-tei-stylesheets"
 
 # Wherever your files are
 transformtei docxtotei myTestFile.docx
@@ -38,6 +37,8 @@ transformtei docxtotei myTestFile.docx
 ```
 
 ### GitHub Action
+
+(See [.github/workflows/test.yaml](.github/workflows/test.yaml) for an example)
 
 ```yaml
 
@@ -56,12 +57,10 @@ jobs:
       - name: Convert ODD to RNG
         uses: joeytakeda/docker-tei-stylesheets # Runs this action 
         with:
-          command: "teitorng"
-          args: "--odd rel/path/to/ODD.odd" # yields rel/path/to/ODD.rng
+          command: "teitorng --odd rel/path/to/ODD.odd" # yields rel/path/to/ODD.rng
       - name: "Convert TEI to HTML"
         uses: joeytakeda/docker-tei-stylesheets # Runs this action
         with:
-          command: "teitohtml"
-          args: "poem.xml my/website/poem.html"
+          command: "teitohtml poem.xml my/website/poem.html"
 
 ```

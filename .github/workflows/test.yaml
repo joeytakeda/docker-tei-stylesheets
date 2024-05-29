@@ -10,21 +10,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Test general docx
-        uses: ./ # Uses an action in the root directory
+        uses: ./
         with:
-          command: "docxtotei"
-          args: "_test/docxGeneral.docx _output/docxGeneral.xml"
+          command: "docxtotei _test/docxGeneral.docx _output/docxGeneral.xml"
       - name: "Test pure ODD"
         uses: ./
         with:
-          command: "teitohtml"
-          args: "--odd _test/testPure1.odd _output/teiPure1.html"
+          command: "teitohtml --odd _test/testPure1.odd _output/teiPure1.html"
 
-      - name: "Test PDF"
+      - name: "Test FO"
         uses: ./
         with:
-          command: "teitofo"
-          args: "_test/generalP5.xml _output/generalP5.fo && fop _output/generalP5.fo _output/generalP5.pdf" 
+          command: "teitofo _test/generalP5.xml _output/generalP5.fo"
+      
+      - name: "Test FO to PDF"
+        uses: ./
+        with:
+          command: "fop _output/generalP5.fo _output/generalP5.pdf"
+
       # Use the output from the `hello` step
       - name: Check to see what happened
         if: always()
