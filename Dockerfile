@@ -2,7 +2,7 @@ FROM teic/jenkins
 LABEL maintainer="Joey Takeda"
 
 # For multiple build images
-ARG STYLESHEETS_BRANCH=released
+ARG STYLESHEETS_BRANCH=v7.55.0
 ARG REPO=TEIC/Stylesheets
 
 USER root
