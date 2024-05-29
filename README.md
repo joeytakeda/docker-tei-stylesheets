@@ -12,7 +12,7 @@ This is a **proof-of-concept, experimental, WIP, draft** (etc etc) docker image 
 docker pull ghcr.io/joeytakeda/docker-tei-stylesheets:main
 
 # Now run this, mounting your current directory to the teic_home directory
-docker run --rm -v `pwd`:/tei joeytakeda/docker-tei-stylesheets $COMMAND $INPUT [$OUTPUT]
+docker run --rm -v `pwd`:/tei ghcr.io/joeytakeda/docker-tei-stylesheets:main $COMMAND $INPUT [$OUTPUT]
 
 ```
 
@@ -21,7 +21,7 @@ Example:
 ```bash
 # Convert a docx to TEI
 
-docker run --rm -v `pwd`:/tei joeytakeda/docker-tei-stylesheets docxtotei myTestFile.docx
+docker run --rm -v `pwd`:/tei ghcr.io/joeytakeda/docker-tei-stylesheets:main docxtotei myTestFile.docx
 
 ```
 
@@ -29,16 +29,15 @@ Note that this could be aliased (something like):
 
 ```bash
 # ~/.bash_profile
-alias transformtei="docker run --rm -v `pwd`:/tei joeytakeda/docker-tei-stylesheets"
+alias transformtei="docker run --rm -v `pwd`:/tei ghcr.io/joeytakeda/docker-tei-stylesheets:main"
 
 # Wherever your files are
 transformtei docxtotei myTestFile.docx
-
 ```
 
 ### GitHub Action
 
-(See [.github/workflows/test.yaml](.github/workflows/test.yaml) for an example)
+(See [.github/workflows/test.yaml](.github/workflows/test.yaml) for an example).
 
 ```yaml
 
