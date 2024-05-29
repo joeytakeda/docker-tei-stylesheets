@@ -1,0 +1,24 @@
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test action
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test general docx
+        uses: ./ # Uses an action in the root directory
+        with:
+          command: "docxtotei"
+          args: "_test/docxGeneral.docx _output/docxGeneral.xml"
+      - name: "Test pure ODD"
+        uses: ./
+        with:
+          command: "teitorng"
+          args: "--odd _test/testPure1.odd _output/teiPure1.rng"
+      # Use the output from the `hello` step
+      - name: Check to see what happened
+        run: tree 
