@@ -17,8 +17,9 @@ jobs:
       - name: "Test pure ODD"
         uses: ./
         with:
-          command: "teitorng"
-          args: "--odd _test/testPure1.odd _output/teiPure1.rng"
+          command: "teitohtml"
+          args: "--odd _test/testPure1.odd _output/teiPure1.html"
       # Use the output from the `hello` step
       - name: Check to see what happened
+        if: always()
         run: tree 
